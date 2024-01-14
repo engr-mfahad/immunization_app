@@ -33,13 +33,13 @@ export class DatastoreProcessor {
       itrSize = data.length;
     if (itrSize) {
       this.logger.debug(`Processing dataset of size: ${itrSize} for job id: ${job.id}`);
-      await this.datastoreService.updateJob(job, data, 10);
+      this.datastoreService.updateJob(job, data, 10);
       while (data.length) {
         await this.diseaseService.add(this.parseData(data.shift()));
         this.datastoreService.updateJob(job, data, data.length <= itrSize / 2 ? 50 : 10);
       }
     } else this.logger.debug(`No dataset to process for job id: ${job.id}.`)
-    await this.datastoreService.updateJob(job, null, 100);
+    this.datastoreService.updateJob(job, null, 100);
     this.logger.debug(`Datastore sync for job id: ${job.id} is now completed.`);
   }
 

@@ -5,11 +5,17 @@ import { Disease } from './entities/disease.entity';
 
 @Controller('disease')
 export class DiseaseController {
-  constructor(private readonly diseaseService: DiseaseService) {}
+  constructor(private readonly diseaseService: DiseaseService) { }
 
   @Get('history')
   getHistoricalData(@Query() criteria: DiseaseFilterCriteria): Promise<Disease[]> {
-    console.log(criteria);
-    return this.diseaseService.findAll();
+    return this.diseaseService.find(criteria);
+  }
+
+  @Get('advice')
+  async getAdvice(@Query() criteria: DiseaseFilterCriteria): Promise<string[]> {
+    const advice: Set<string> = new Set();
+    (await this.diseaseService.find(criteria, { advice: true })).forEach(res => advice.add(res.advice));
+    return Array.from(advice);
   }
 }
