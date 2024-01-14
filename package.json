@@ -1,8 +1,8 @@
 {
   "name": "immunization_app",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Immunization application for Mars leadership team to analyze historical data and look for the guidance related to a new spreading infection.",
+  "author": "Muhammad Fahad <engr.m.fahadd@gmail.com",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
